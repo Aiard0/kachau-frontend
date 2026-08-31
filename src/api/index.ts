@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.API_URL
+const API_BASE = import.meta.env.API_URL || 'http://localhost:8080'
 
 export interface LoginRequest {
   email: string
