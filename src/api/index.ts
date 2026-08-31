@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080'
+const API_BASE = import.meta.env.API_URL || 'http://localhost:8080'
 
 export interface LoginRequest {
   email: string
@@ -74,10 +74,7 @@ export interface ApiError {
   path: string
 }
 
-async function request<T>(
-  path: string,
-  options: RequestInit = {}
-): Promise<T> {
+async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
   const token = localStorage.getItem('token')
 
   const headers: HeadersInit = {
@@ -98,8 +95,7 @@ async function request<T>(
       if (error.messages && error.messages.length > 0 && error.messages[0]) {
         errorMessage = error.messages[0]
       }
-    } catch {
-    }
+    } catch {}
     const err: ApiError = {
       timestamp: '',
       status: response.status,
@@ -144,8 +140,7 @@ export const api = {
 
   getUser: (id: string) => request<User>(`/users/${id}`),
 
-  testAuth: () =>
-    request<string>('/test'),
+  testAuth: () => request<string>('/test'),
 
   getOrders: () => request<Order[]>('/orders'),
 
