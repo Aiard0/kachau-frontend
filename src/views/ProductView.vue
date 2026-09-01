@@ -6,6 +6,7 @@ import { useCartStore } from '@/stores/cart'
 import { useAuthStore } from '@/stores/auth'
 import { ShoppingCart, LogOut, User, LogIn, UserPlus, ArrowLeft } from '@lucide/vue'
 import { triggerProductsReload } from '@/events'
+import { formatPrice } from '@/utils/format'
 
 const route = useRoute()
 const router = useRouter()
@@ -122,7 +123,7 @@ function goHome() {
           <div>
             <h1 class="text-3xl font-bold text-gray-900">{{ product.name }}</h1>
             <p class="text-2xl font-bold text-gray-900 mt-4">
-              R${{ product.price.toFixed(2) }}
+              R${{ formatPrice(product.price) }}
             </p>
             <p class="text-gray-600 mt-4">{{ product.description }}</p>
             <button

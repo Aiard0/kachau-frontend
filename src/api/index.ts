@@ -34,13 +34,6 @@ export interface Product {
   updatedAt: string
 }
 
-export interface ProductCreate {
-  name: string
-  description: string
-  price: number
-  imageUrl: string
-}
-
 export interface OrderItemResponseDTO {
   id: number
   productName: string
@@ -59,7 +52,6 @@ export interface OrderResponseDTO {
 }
 
 export type Order = OrderResponseDTO
-export type OrderItem = OrderItemResponseDTO
 
 export interface CheckoutItem {
   productId: number
@@ -130,21 +122,7 @@ export const api = {
 
   getProduct: (id: number) => request<Product>(`/products/${id}`),
 
-  createProduct: (data: ProductCreate) =>
-    request<Product>('/products', {
-      method: 'POST',
-      body: JSON.stringify(data),
-    }),
-
   getUsers: () => request<User[]>('/users'),
-
-  getUser: (id: string) => request<User>(`/users/${id}`),
-
-  testAuth: () => request<string>('/test'),
-
-  getOrders: () => request<Order[]>('/orders'),
-
-  getOrder: (id: string) => request<Order>(`/orders/${id}`),
 
   getOrdersByBuyer: (buyerId: string) => request<Order[]>(`/orders/buyer/${buyerId}`),
 

@@ -5,6 +5,7 @@ import { useCartStore } from '@/stores/cart'
 import { useAuthStore } from '@/stores/auth'
 import { api, type ApiError } from '@/api'
 import { ArrowLeft, Trash2, Eye, ShoppingBag, Truck, CheckCircle } from '@lucide/vue'
+import { formatPrice } from '@/utils/format'
 
 const router = useRouter()
 const cart = useCartStore()
@@ -117,7 +118,7 @@ async function handleCheckout() {
                 {{ item.product.description }}
               </p>
               <p class="font-bold text-gray-900 mt-2">
-                R${{ item.product.price.toFixed(2) }}
+                R${{ formatPrice(item.product.price) }}
               </p>
               <div class="flex items-center gap-4 mt-2">
                 <div class="flex items-center gap-2">
@@ -166,7 +167,7 @@ async function handleCheckout() {
             </div>
             <div class="flex justify-between font-bold text-gray-900 text-lg pt-2 border-t">
               <span>Total:</span>
-              <span>R${{ cart.totalPrice.toFixed(2) }}</span>
+              <span>R${{ formatPrice(cart.totalPrice) }}</span>
             </div>
           </div>
           <button

@@ -6,6 +6,7 @@ import { useAuthStore } from '@/stores/auth'
 import { useCartStore } from '@/stores/cart'
 import { ArrowLeft, Package, LogOut, ShoppingCart as ShoppingCartIcon, LogIn, UserPlus, User, ArrowUpDown } from '@lucide/vue'
 import { triggerProductsReload } from '@/events'
+import { formatPrice } from '@/utils/format'
 
 const router = useRouter()
 const auth = useAuthStore()
@@ -175,7 +176,7 @@ function formatDate(dateStr: string) {
             </div>
             <div class="text-right">
               <p class="text-lg font-bold text-gray-900">
-                R${{ order.totalPrice.toFixed(2) }}
+                R${{ formatPrice(order.totalPrice) }}
               </p>
             </div>
           </div>
@@ -191,11 +192,11 @@ function formatDate(dateStr: string) {
                 <div class="flex-1">
                   <p class="font-medium text-gray-900">{{ item.productName }}</p>
                   <p class="text-sm text-gray-500">
-                    R${{ item.unitPrice.toFixed(2) }} x {{ item.quantity }}
+                    R${{ formatPrice(item.unitPrice) }} x {{ item.quantity }}
                   </p>
                 </div>
                 <p class="font-medium text-gray-900">
-                  R${{ (item.unitPrice * item.quantity).toFixed(2) }}
+                  R${{ formatPrice(item.unitPrice * item.quantity) }}
                 </p>
               </div>
             </div>

@@ -6,6 +6,7 @@ import { useAuthStore } from '@/stores/auth'
 import { useRouter } from 'vue-router'
 import { ShoppingCart, LogOut, User, LogIn, UserPlus, Search } from '@lucide/vue'
 import { onProductsReload } from '@/events'
+import { formatPrice } from '@/utils/format'
 
 const router = useRouter()
 const cart = useCartStore()
@@ -127,6 +128,9 @@ function reloadProducts() {
             class="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
+        <p v-if="!loading && !error && products.length > 0" class="text-sm text-gray-500 mt-2">
+          Exibindo {{ filteredProducts.length }} de {{ products.length }} itens
+        </p>
       </div>
 
       <div v-if="loading" class="text-center py-10">Carregando...</div>
@@ -137,26 +141,25 @@ function reloadProducts() {
         <span v-if="searchQuery">Nenhum produto encontrado para "{{ searchQuery }}"</span>
         <span v-else>Nenhum produto disponível</span>
       </div>
-      <div v-else class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div v-else class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         <div
           v-for="product in filteredProducts"
           :key="product.id"
           class="bg-white rounded-lg shadow overflow-hidden"
         >
-          <img
-            :src="product.imageUrl"
-            :alt="product.name"
-            class="w-full h-48 object-cover"
-          />
+          <div class="aspect-square">
+            <img
+              :src="product.imageUrl"
+              :alt="product.name"
+              class="w-full h-full object-cover"
+            />
+          </div>
           <div class="p-4">
-            <h3 class="text-lg font-semibold text-gray-900">
+            <h3 class="text-lg font-semibold text-gray-900 line-clamp-2">
               {{ product.name }}
             </h3>
-            <p class="text-gray-600 text-sm mt-1">
-              {{ product.description }}
-            </p>
             <p class="text-xl font-bold text-gray-900 mt-2">
-              R${{ product.price.toFixed(2) }}
+              R${{ formatPrice(product.price) }}
             </p>
             <div class="mt-4 flex gap-2">
               <button
