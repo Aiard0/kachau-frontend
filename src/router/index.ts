@@ -34,7 +34,7 @@ const router = createRouter({
       component: () => import('@/views/OrdersView.vue'),
     },
     {
-      path: '/video',
+      path: '/como-fiz',
       name: 'video',
       component: () => import('@/views/VideoView.vue'),
     },

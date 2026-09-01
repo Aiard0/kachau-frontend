@@ -78,7 +78,7 @@ function reloadProducts() {
             Kachau<span class="text-blue-500">.</span>Store
           </router-link>
           <router-link
-            to="/video"
+            to="/como-fiz"
             class="text-gray-300 hover:text-white flex items-center gap-1 text-sm font-medium"
           >
             <Video :size="18" />
