@@ -4,7 +4,7 @@ import { api, type Product } from '@/api'
 import { useCartStore } from '@/stores/cart'
 import { useAuthStore } from '@/stores/auth'
 import { useRouter } from 'vue-router'
-import { ShoppingCart, LogOut, User, LogIn, UserPlus, Search } from '@lucide/vue'
+import { ShoppingCart, LogOut, User, LogIn, UserPlus, Search, Video } from '@lucide/vue'
 import { onProductsReload } from '@/events'
 import { formatPrice } from '@/utils/format'
 
@@ -73,9 +73,18 @@ function reloadProducts() {
   <div class="min-h-screen bg-gray-100">
     <nav class="bg-gray-900 shadow">
       <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <router-link to="/" class="text-2xl font-bold text-white hover:text-gray-300" @click="reloadProducts">
-          Kachau<span class="text-blue-500">.</span>Store
-        </router-link>
+        <div class="flex items-center gap-6">
+          <router-link to="/" class="text-2xl font-bold text-white hover:text-gray-300" @click="reloadProducts">
+            Kachau<span class="text-blue-500">.</span>Store
+          </router-link>
+          <router-link
+            to="/video"
+            class="text-gray-300 hover:text-white flex items-center gap-1 text-sm font-medium"
+          >
+            <Video :size="18" />
+            Vídeo
+          </router-link>
+        </div>
         <div class="flex items-center gap-4">
           <button
             @click="goToCart"
